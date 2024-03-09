@@ -15,6 +15,6 @@ public class Products extends Default {
     @Column()
     int amount = 0;
     @ManyToOne()
-    @JoinColumn(name = "restaurantId")
+    @JoinColumn(name = "restaurant")
     Restaurant restaurant;
 }
