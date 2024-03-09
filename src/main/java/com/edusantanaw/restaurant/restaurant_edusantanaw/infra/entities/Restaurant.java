@@ -1,19 +1,9 @@
 package com.edusantanaw.restaurant.restaurant_edusantanaw.infra.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-@Entity()
 @Table(name = "restaurant")
-@Data()
-@Builder()
-@AllArgsConstructor()
-@NoArgsConstructor()
-public class Restaurant {
-    @Id()
-    @Column()
-    @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+public class Restaurant extends Default {
     @Column(nullable = false)
     String name;
     @Column()
