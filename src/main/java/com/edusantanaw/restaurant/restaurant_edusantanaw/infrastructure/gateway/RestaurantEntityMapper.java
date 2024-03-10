@@ -3,15 +3,13 @@ package com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.gateway
 import com.edusantanaw.restaurant.restaurant_edusantanaw.domain.entities.Restaurant;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.entities.RestaurantEntity;
 
-import java.util.Arrays;
-
 public class RestaurantEntityMapper {
     RestaurantEntity toEntity(Restaurant data) {
         return RestaurantEntity
                 .builder()
                 .name(data.name())
-                .categories(String.join(",",data.categories())
-)                .open(data.open() ? 1 : 0)
+                .categories(String.join(",", data.categories())
+                ).open(data.open() ? 1 : 0)
                 .perfilPhoto(data.perfilPhoto())
                 .build();
     }
@@ -22,6 +20,7 @@ public class RestaurantEntityMapper {
                 data.getPerfilPhoto(),
                 data.getDescription(),
                 data.getCategories().split(","),
-                data.getOpen() == 1);
+                data.getOpen() == 1
+        );
     }
 }

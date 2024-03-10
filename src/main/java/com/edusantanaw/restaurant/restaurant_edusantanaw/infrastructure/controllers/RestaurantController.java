@@ -5,7 +5,8 @@ import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.Cr
 import com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.controllers.dtos.CreateRestaurantDto;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.domain.entities.Restaurant;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,15 @@ public class RestaurantController {
     }
 
     @PostMapping()
-    public Restaurant create(@RequestBody() @Valid() CreateRestaurantDto data) {
-        return this.createRestaurantUsecase.create(
+    public ResponseEntity<Restaurant> create(@RequestBody() @Valid() CreateRestaurantDto data) {
+        Restaurant restaurant =  this.createRestaurantUsecase.create(
                 new Restaurant(
                         data.getName(),
                         data.getPerfilPhoto(),
                         data.getDescription(),
                         data.getCategories(),
                         true
-                )
-        );
+                ));
+        return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
     }
 }

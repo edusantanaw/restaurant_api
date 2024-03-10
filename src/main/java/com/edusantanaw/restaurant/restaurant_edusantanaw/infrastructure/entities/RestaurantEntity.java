@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Builder()
 @Entity()
@@ -11,11 +12,11 @@ import java.util.Date;
 @AllArgsConstructor()
 @NoArgsConstructor()
 @Table(name = "restaurant")
-public class RestaurantEntity {
+public class RestaurantEntity<R> {
     @Id()
     @Column()
     @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    UUID id;
     @Column(nullable = false)
     String name;
     @Column()

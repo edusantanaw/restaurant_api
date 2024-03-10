@@ -1,15 +1,25 @@
 package com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Table(name = "products")
+@Builder()
+@Entity()
+@Data()
+@AllArgsConstructor()
+@NoArgsConstructor()
 public class ProductsEntity {
     @Id()
     @Column()
     @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    UUID id;
     @Column()
     String name;
     @Column()
@@ -20,9 +30,8 @@ public class ProductsEntity {
     String photo;
     @Column()
     int amount = 0;
-    @ManyToOne()
-    @JoinColumn(name = "restaurant")
-    RestaurantEntity restaurant;
+    @Column()
+    UUID restaurant;
     @Column(updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     Date createdAt;
     @Column()
