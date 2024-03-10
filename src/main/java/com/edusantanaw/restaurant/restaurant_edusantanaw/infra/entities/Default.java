@@ -11,7 +11,6 @@ import java.util.Date;
 @Entity()
 @Data()
 @Builder()
-@AllArgsConstructor()
 @NoArgsConstructor()
 public class Default {
     @Id()

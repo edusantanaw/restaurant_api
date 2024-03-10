@@ -1,13 +1,13 @@
 package com.edusantanaw.restaurant.restaurant_edusantanaw.domain.entities;
 
-public class Restaurant {
+public class RestaurantEntity {
     private String _name;
     private String _perfilPhoto;
     private String _description;
     private String[] _categories;
     private boolean _open;
 
-    Restaurant(String name, String perfilPhoto, String desc, String[] categories, boolean open){
+    public RestaurantEntity(String name, String perfilPhoto, String desc, String[] categories, boolean open){
             _name = name;
             _perfilPhoto = perfilPhoto;
             _description = desc;
