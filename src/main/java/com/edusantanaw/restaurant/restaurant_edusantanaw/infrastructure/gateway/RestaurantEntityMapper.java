@@ -20,7 +20,8 @@ public class RestaurantEntityMapper {
                 data.getPerfilPhoto(),
                 data.getDescription(),
                 data.getCategories().split(","),
-                data.getOpen() == 1
+                data.getOpen() == 1,
+                data.getId()
         );
     }
 }

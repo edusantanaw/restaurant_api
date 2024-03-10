@@ -29,7 +29,8 @@ public class ProductController {
                 data.getDescription(),
                 data.getPhoto(),
                 data.getAmount(),
-                data.getRestaurant()
+                data.getRestaurant(),
+                null
         ));
         return ResponseEntity.status(201).body(products);
     }

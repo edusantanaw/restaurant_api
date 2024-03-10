@@ -20,14 +20,14 @@ public class CreateProductInteractor {
     public Products create(Products data) throws NotFoundException {
         Optional<Restaurant> restaurant = this.restaurantGateway.loadById(data.restaurant());
         if(restaurant.isEmpty()) throw new NotFoundException("restaurante não encontrado!");
-        Products product = this.createProductGateway.create(new Products(
+        return this.createProductGateway.create(new Products(
                 data.name(),
                 data.price(),
                 data.description(),
                 data.photo(),
                 data.amount(),
-                data.restaurant()
+                data.restaurant(),
+                null
         ));
-        return product;
     }
 }

@@ -14,7 +14,6 @@ public class ProductRepositoryGateway implements CreateProductGateway {
         this.productEntityMapper = productEntityMapper;
     }
 
-
     @Override
     public Products create(Products data) {
         ProductsEntity productsEntity = this.productEntityMapper.toEntity(data);

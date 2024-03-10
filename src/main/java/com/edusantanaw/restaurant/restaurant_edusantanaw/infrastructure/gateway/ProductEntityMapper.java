@@ -24,7 +24,8 @@ public class ProductEntityMapper {
                 data.getDescription(),
                 data.getPhoto(),
                 data.getAmount(),
-                data.getRestaurant()
+                data.getRestaurant(),
+                data.getId()
         );
     }
 }
