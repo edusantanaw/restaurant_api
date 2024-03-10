@@ -1,9 +1,8 @@
-package com.edusantanaw.restaurant.restaurant_edusantanaw.controllers.restaurant.dtos;
+package com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.controllers.dtos;
 
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 @Data()
 public class CreateRestaurantDto {
@@ -12,6 +11,5 @@ public class CreateRestaurantDto {
     @NotBlank(message = "a descrição é obrigatoria!")
     String description;
     String perfilPhoto;
-    @Length(min = 1, message = "deve ter pelo menos 1 categoria!")
     String[] categories;
 }
