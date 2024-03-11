@@ -1,6 +1,7 @@
 package com.edusantanaw.restaurant.restaurant_edusantanaw.main;
 
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.CreateRestaurantInteractor;
+import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.LoadAllRestaurantInteractor;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.LoadRestaurantInteractor;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.gateway.RestaurantEntityMapper;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.gateway.RestaurantRepositoryGateway;
@@ -28,6 +29,11 @@ public class RestaurantConfig {
     @Bean
     LoadRestaurantInteractor loadRestaurantInteractor(RestaurantRepositoryGateway restaurantRepositoryGateway){
         return  new LoadRestaurantInteractor(restaurantRepositoryGateway);
+    }
+
+    @Bean
+    LoadAllRestaurantInteractor loadAllRestaurantInteractor(RestaurantRepositoryGateway restaurantRepositoryGateway){
+        return new LoadAllRestaurantInteractor(restaurantRepositoryGateway);
     }
 
 }
