@@ -3,6 +3,7 @@ package com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.gateway
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.dtos.LoadAllRequestDto;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.dtos.LoadAllResponseDto;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.gateway.CreateRestaurantGateway;
+import com.edusantanaw.restaurant.restaurant_edusantanaw.application.gateway.DeleteGateway;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.gateway.LoadAllGateway;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.gateway.LoadByIdGateway;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.domain.entities.Restaurant;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class RestaurantRepositoryGateway implements CreateRestaurantGateway, LoadByIdGateway<Restaurant>, LoadAllGateway<LoadAllRequestDto, Restaurant> {
+public class RestaurantRepositoryGateway implements CreateRestaurantGateway, DeleteGateway<Restaurant>, LoadAllGateway<LoadAllRequestDto, Restaurant> {
 
     private final RestaurantRepository restaurantRepository;
     private  final RestaurantEntityMapper restaurantEntityMapper;
@@ -40,8 +41,14 @@ public class RestaurantRepositoryGateway implements CreateRestaurantGateway, Loa
 
     public LoadAllResponseDto<Restaurant> loadAll(LoadAllRequestDto data){
         Pageable pageable = PageRequest.of(data.skip(), data.take());
-        Page<RestaurantEntity> restaurants = this.restaurantRepository.findByNameContaining(data.search(), pageable);
+        Page<RestaurantEntity> restaurants = this.restaurantRepository.findByNameContainingAndDeleted(data.search(), pageable, 0);
         List<Restaurant> restaurantsDomain = restaurants.map(this.restaurantEntityMapper::toDomain).toList();
         return new LoadAllResponseDto<>(restaurantsDomain, restaurants.getTotalElements());
+    }
+
+    public void delete(Restaurant restaurant) {
+    RestaurantEntity restaurantEntity = this.restaurantEntityMapper.toEntity(restaurant);
+    restaurantEntity.setDeleted(1);
+    this.restaurantRepository.save(restaurantEntity);
     }
 }

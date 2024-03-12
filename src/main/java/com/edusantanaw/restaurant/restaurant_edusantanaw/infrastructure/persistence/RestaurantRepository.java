@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Service()
 public interface RestaurantRepository extends JpaRepository<RestaurantEntity, UUID> {
-    Page<RestaurantEntity> findByNameContaining(String search, Pageable page);
+    Page<RestaurantEntity> findByNameContainingAndDeleted(String search, Pageable page, int deleted);
 }

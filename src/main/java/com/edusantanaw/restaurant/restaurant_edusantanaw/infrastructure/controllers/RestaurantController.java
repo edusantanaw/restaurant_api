@@ -5,11 +5,13 @@ import com.edusantanaw.restaurant.restaurant_edusantanaw.application.dtos.LoadAl
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.dtos.LoadAllResponseDto;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.exceptions.NotFoundException;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.CreateRestaurantInteractor;
+import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.DeleteRestaurantInteractor;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.LoadAllRestaurantInteractor;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.application.usecases.LoadRestaurantInteractor;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.infrastructure.controllers.dtos.CreateRestaurantDto;
 import com.edusantanaw.restaurant.restaurant_edusantanaw.domain.entities.Restaurant;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +25,17 @@ public class RestaurantController {
     private final LoadRestaurantInteractor loadRestaurantInteractor;
     private final LoadAllRestaurantInteractor loadAllRestaurantInteractor;
 
+    private final DeleteRestaurantInteractor deleteRestaurantInteractor;
+
     public RestaurantController(
             CreateRestaurantInteractor createRestaurantUsecase,
             LoadRestaurantInteractor loadRestaurantInteractor,
-            LoadAllRestaurantInteractor loadAllRestaurantInteractor
+            LoadAllRestaurantInteractor loadAllRestaurantInteractor, DeleteRestaurantInteractor deleteRestaurantInteractor
     ) {
         this.createRestaurantUsecase = createRestaurantUsecase;
         this.loadRestaurantInteractor = loadRestaurantInteractor;
         this.loadAllRestaurantInteractor = loadAllRestaurantInteractor;
+        this.deleteRestaurantInteractor = deleteRestaurantInteractor;
     }
 
     @PostMapping()
@@ -59,5 +64,10 @@ public class RestaurantController {
                 take, skip, search
         ));
         return ResponseEntity.status(200).body(restaurant);
+    }
+
+    public ResponseEntity delete(@PathVariable UUID id) throws NotFoundException {
+        Boolean resp = this.deleteRestaurantInteractor.delete(id);
+        return ResponseEntity.status(200).body(resp);
     }
 }
